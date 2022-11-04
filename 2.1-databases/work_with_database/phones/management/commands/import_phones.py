@@ -9,9 +9,10 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
-        with open('phones.csv', 'r') as file:
+        with open('/home/chrnv/PycharmProjects/django/2.1-databases/work_with_database/phones.csv', 'r') as file:
             phones = list(csv.DictReader(file, delimiter=';'))
 
         for phone in phones:
-            # TODO: Добавьте сохранение модели
-            pass
+            Phone(name=phone['name'], image=phone['image'], price=phone['price'],
+                              release_date=phone['release_date'], lte_exists=phone['lte_exists']).save()
+
