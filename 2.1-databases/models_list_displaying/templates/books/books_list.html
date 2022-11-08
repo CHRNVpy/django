@@ -3,21 +3,37 @@
 
 {% block title %}Каталог книг{% endblock %}
 {% block content %}
+
+<body>
     <div class="container">
         <div class="header">
             <h1><a href="/books">Каталог</a></h1>
         </div>
         <div class="row">
+            <tbody>
+            {% for book in books %}
             <div class="book col-md-4">
-                <h2>Сияние</h2>
-                <p>Автор: Стивен Кинг</p>
-                <p>Дата публикации: 2018-09-10</p>
+                <h2><a href="/books/{{ book.1 }}">{{ book.0.name }}</a></h2>
+                <p>Автор: {{ book.0.author }}</p>
+                <p>Дата публикации: {{ book.1 }}</p>
             </div>
-            <div class="book col-md-4">
-                <h2>1984</h2>
-                <p>Автор: Джордж Оруэл</p>
-                <p>Дата публикации: 2015-03-11</p>
-            </div>
+            {% endfor %}
+            </tbody>
+                {% if date and previous_date %}
+                <div>
+                    <div class="pagination">
+                        <a href="/books/{{ previous_date }}">< {{ previous_date }}</a>
+                    </div>
+                    {% endif %}
+                    {% if date and next_date%}
+                    <div class="pagination">
+                        <a href="/books/{{ next_date }}">{{ next_date }} ></a>
+                    </div>
+                    {% endif %}
+                </div>
+
+
         </div>
     </div>
 {% endblock %}
+</body>
